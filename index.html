@@ -197,9 +197,9 @@
         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#89d819] to-transparent opacity-70"></div>
         
         <!-- Profile Picture Container -->
-        <div class="relative w-40 h-40 flex items-center justify-center mt-4">
-            <!-- Spinning Portal Background JPG (Using a Radial Mask to fix the black void bug) -->
-            <img src="rick-morty-portal-964273.jpg" alt="Portal" class="absolute w-64 h-64 z-0 opacity-100 animate-spin-slow" style="pointer-events: none; -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 65%); mask-image: radial-gradient(circle, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 65%);">
+        <div class="relative w-40 h-40 flex items-center justify-center mt-4" style="isolation: isolate;">
+            <!-- Spinning Portal Background JPG (Enlarged and blended perfectly) -->
+            <img src="rick-morty-portal-964273.jpg" alt="Portal" class="absolute w-80 h-80 max-w-none z-[-1] opacity-90 animate-spin-slow" style="pointer-events: none; mix-blend-mode: screen;">
             
             <!-- Actual Profile Picture layered on top -->
             <div class="relative w-32 h-32 rounded-full portal-border p-1 bg-black overflow-hidden z-10">
