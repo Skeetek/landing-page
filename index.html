@@ -113,9 +113,21 @@
             background: var(--portal-green);
             border-radius: 4px;
         }
+        
+        /* Specific Music Button adjustments */
+        .music-btn {
+            border-style: dashed;
+            cursor: pointer;
+        }
+        .music-btn:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body class="antialiased flex items-center justify-center p-4 sm:p-8">
+
+    <!-- Audio Element (hidden) - Source is injected via JavaScript -->
+    <audio id="bgMusic" loop></audio>
 
     <!-- Looping Video Background -->
     <video autoplay loop muted playsinline class="video-bg">
@@ -132,9 +144,15 @@
         <!-- Decorative subtle elements -->
         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#89d819] to-transparent opacity-70"></div>
         
-        <!-- Profile Picture -->
-        <div class="relative w-36 h-36 rounded-full portal-border p-1 bg-black overflow-hidden mt-4">
-            <img src="365238.jpg" alt="Skeetek" class="w-full h-full object-cover rounded-full shadow-inner" onerror="this.src='https://placehold.co/200x200/1b4504/89d819?text=Rick'">
+        <!-- Profile Picture Container -->
+        <div class="relative w-40 h-40 flex items-center justify-center mt-4">
+            <!-- Spinning Portal Background GIF -->
+            <img src="portal-rick-and-morty.gif" alt="Portal" class="absolute w-56 h-56 z-0 mix-blend-screen opacity-90" style="pointer-events: none;">
+            
+            <!-- Actual Profile Picture layered on top -->
+            <div class="relative w-32 h-32 rounded-full portal-border p-1 bg-black overflow-hidden z-10">
+                <img src="365238.jpg" alt="Skeetek" class="w-full h-full object-cover rounded-full shadow-inner" onerror="this.src='https://placehold.co/200x200/1b4504/89d819?text=Rick'">
+            </div>
         </div>
 
         <!-- Name and Tagline -->
@@ -189,6 +207,12 @@
                 </span>
                 <i class="fa-solid fa-chevron-right opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
             </a>
+            
+            <!-- Music Toggle Button -->
+            <button id="musicToggleBtn" onclick="toggleMusic()" class="rm-button music-btn mt-2 w-full py-3 px-6 rounded-xl flex items-center justify-center gap-3 text-md font-semibold tracking-wider text-gray-300">
+                <i id="musicIcon" class="fa-solid fa-play"></i>
+                <span id="musicText">Play Theme</span>
+            </button>
 
         </div>
 
@@ -203,8 +227,51 @@
         </div>
     </div>
 
-    <!-- Helper Script for Native Sharing or Clipboard Copying -->
+    <!-- Helper Scripts -->
     <script>
+        // Music Toggle Logic
+        const bgMusic = document.getElementById('bgMusic');
+        const musicIcon = document.getElementById('musicIcon');
+        const musicText = document.getElementById('musicText');
+        let isPlaying = false;
+        let isSongSelected = false;
+
+        // Array of your exact filenames
+        const playlist = [
+            "Rick and Morty Official Soundtrack  Don't Look Back (Diane's Version) - Ryan Elder & Kotomi.mp3",
+            "Rick and Morty Official Soundtrack  For Ages - WaxWane & Ryan Elder  Rick and Morty.mp3",
+            "Rick and Morty Official Soundtrack  Dimensional Infrastructure - Ryan Elder  Rick and Morty.mp3"
+        ];
+
+        function toggleMusic() {
+            // Select a random song only on the first play
+            if (!isSongSelected) {
+                const randomSong = playlist[Math.floor(Math.random() * playlist.length)];
+                bgMusic.src = randomSong;
+                isSongSelected = true;
+                showToast("Loading random track...");
+            }
+
+            if (isPlaying) {
+                bgMusic.pause();
+                musicIcon.classList.remove('fa-pause');
+                musicIcon.classList.add('fa-play');
+                musicText.innerText = "Play Theme";
+                isPlaying = false;
+            } else {
+                bgMusic.volume = 0.5; // Set a reasonable default volume
+                bgMusic.play().catch(error => {
+                    console.error("Audio playback failed:", error);
+                    showToast("Browser prevented audio playback.");
+                });
+                musicIcon.classList.remove('fa-play');
+                musicIcon.classList.add('fa-pause');
+                musicText.innerText = "Pause Theme";
+                isPlaying = true;
+            }
+        }
+        
+        // Share / Copy Logic
         function shareProfile() {
             const url = window.location.href;
             if (navigator.share) {
@@ -220,8 +287,6 @@
                 textArea.select();
                 try {
                     document.execCommand('copy');
-                    
-                    // Simple inline toast notification without using alert()
                     showToast("Link copied to clipboard!");
                 } catch (err) {
                     console.error('Failed to copy', err);
@@ -230,6 +295,7 @@
             }
         }
 
+        // Custom Toast Notification
         function showToast(message) {
             const toast = document.createElement('div');
             toast.textContent = message;
