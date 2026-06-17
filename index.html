@@ -49,6 +49,15 @@
             100% { box-shadow: 0 0 10px var(--portal-green), inset 0 0 10px var(--portal-green); }
         }
 
+        /* Added spinning animation for the static portal JPG */
+        @keyframes spin-portal {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-portal 10s linear infinite;
+        }
+
         .portal-border {
             border: 4px solid var(--portal-green);
             animation: pulse-glow 2s infinite ease-in-out;
@@ -146,8 +155,8 @@
         
         <!-- Profile Picture Container -->
         <div class="relative w-40 h-40 flex items-center justify-center mt-4">
-            <!-- Spinning Portal Background GIF -->
-            <img src="portal-rick-and-morty.gif" alt="Portal" class="absolute w-56 h-56 z-0 mix-blend-screen opacity-90" style="pointer-events: none;">
+            <!-- Spinning Portal Background Image (with CSS magic to remove white background and make it spin) -->
+            <img src="rick-morty-portal-964273.jpg" alt="Portal" class="absolute w-56 h-56 z-0 opacity-90 animate-spin-slow rounded-full" style="pointer-events: none; mix-blend-mode: screen; filter: invert(1) hue-rotate(180deg) brightness(1.2);">
             
             <!-- Actual Profile Picture layered on top -->
             <div class="relative w-32 h-32 rounded-full portal-border p-1 bg-black overflow-hidden z-10">
@@ -243,8 +252,37 @@
             "Rick and Morty Official Soundtrack  Dimensional Infrastructure - Ryan Elder  Rick and Morty.mp3"
         ];
 
+        // Attempt to autoplay when the page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            if (!isSongSelected) {
+                const randomSong = playlist[Math.floor(Math.random() * playlist.length)];
+                bgMusic.src = randomSong;
+                isSongSelected = true;
+            }
+            
+            bgMusic.volume = 0.5;
+            
+            // Browsers typically block autoplay without user interaction.
+            // We catch the promise rejection so it doesn't throw an ugly error in the console.
+            const playPromise = bgMusic.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // Autoplay worked!
+                    musicIcon.classList.remove('fa-play');
+                    musicIcon.classList.add('fa-pause');
+                    musicText.innerText = "Pause Theme";
+                    isPlaying = true;
+                }).catch(error => {
+                    // Autoplay was blocked by the browser. 
+                    // This is normal. The user will just have to click the button.
+                    console.log("Autoplay blocked by browser policy. User must interact first.");
+                });
+            }
+        });
+
         function toggleMusic() {
-            // Select a random song only on the first play
+            // Failsafe: if the song wasn't selected on load for some reason
             if (!isSongSelected) {
                 const randomSong = playlist[Math.floor(Math.random() * playlist.length)];
                 bgMusic.src = randomSong;
