@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skeetek | Links</title>
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Load Google Fonts: Orbitron for that Sci-Fi feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Load FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --portal-green: #89d819;
+            --portal-dark: #1b4504;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            /* Fallback background if video fails */
+            background: radial-gradient(circle at center, #1b0a2b 0%, #05020a 100%);
+            color: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* Video Background Styling */
+        .video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -2;
+            opacity: 0.85; /* Slightly dim it so the neon box stands out */
+        }
+
+        /* Portal Glow Animation for Profile Picture */
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 10px var(--portal-green), inset 0 0 10px var(--portal-green); }
+            50% { box-shadow: 0 0 30px var(--portal-green), inset 0 0 20px var(--portal-green); }
+            100% { box-shadow: 0 0 10px var(--portal-green), inset 0 0 10px var(--portal-green); }
+        }
+
+        .portal-border {
+            border: 4px solid var(--portal-green);
+            animation: pulse-glow 2s infinite ease-in-out;
+        }
+
+        /* Glitch effect on hover for the name */
+        .glitch-hover:hover {
+            animation: glitch 0.3s linear infinite;
+            color: #fff;
+            text-shadow: 2px 0 var(--portal-green), -2px 0 #e43f5a;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        /* Custom Button Styling */
+        .rm-button {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--portal-green);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .rm-button::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: var(--portal-green);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+
+        .rm-button:hover::before {
+            left: 0;
+        }
+
+        .rm-button:hover {
+            color: black;
+            box-shadow: 0 0 15px var(--portal-green);
+            transform: translateY(-3px);
+            font-weight: 800;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--portal-green);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="antialiased flex items-center justify-center p-4 sm:p-8">
+
+    <!-- Looping Video Background -->
+    <video autoplay loop muted playsinline class="video-bg">
+        <source src="1675813688-1675813688-2023-rick-and-morty-live-wallpaper.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Dark overlay to ensure text is readable against the background -->
+    <div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[-1]"></div>
+
+    <!-- Main Container -->
+    <div class="w-full max-w-md w-full bg-black/60 border-2 border-[#89d819] rounded-3xl p-8 shadow-[0_0_30px_rgba(137,216,25,0.4)] flex flex-col items-center gap-6 backdrop-blur-md relative overflow-hidden">
+        
+        <!-- Decorative subtle elements -->
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#89d819] to-transparent opacity-70"></div>
+        
+        <!-- Profile Picture -->
+        <div class="relative w-36 h-36 rounded-full portal-border p-1 bg-black overflow-hidden mt-4">
+            <img src="365238.jpg" alt="Skeetek" class="w-full h-full object-cover rounded-full shadow-inner" onerror="this.src='https://placehold.co/200x200/1b4504/89d819?text=Rick'">
+        </div>
+
+        <!-- Name and Tagline -->
+        <div class="text-center w-full">
+            <h1 class="text-3xl sm:text-4xl font-bold tracking-widest text-[#89d819] drop-shadow-[0_0_8px_rgba(137,216,25,0.8)] glitch-hover cursor-default transition-all duration-300">
+                Skeetek
+            </h1>
+            <p class="text-gray-300 text-sm mt-2 font-mono tracking-wider opacity-80">
+                Wubba Lubba Dub Dub!
+            </p>
+        </div>
+
+        <!-- Links Section -->
+        <div class="w-full flex flex-col gap-4 mt-2">
+            
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/easy.fragz/" target="_blank" rel="noopener noreferrer" 
+               class="rm-button w-full py-4 px-6 rounded-xl flex items-center justify-between group text-lg font-semibold tracking-wider">
+                <span class="flex items-center gap-3">
+                    <i class="fa-brands fa-instagram text-2xl group-hover:text-black transition-colors"></i>
+                    Instagram
+                </span>
+                <i class="fa-solid fa-chevron-right opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+            </a>
+
+            <!-- GitHub -->
+            <a href="https://github.com/Skeetek" target="_blank" rel="noopener noreferrer" 
+               class="rm-button w-full py-4 px-6 rounded-xl flex items-center justify-between group text-lg font-semibold tracking-wider">
+                <span class="flex items-center gap-3">
+                    <i class="fa-brands fa-github text-2xl group-hover:text-black transition-colors"></i>
+                    GitHub
+                </span>
+                <i class="fa-solid fa-chevron-right opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+            </a>
+
+            <!-- Steam -->
+            <a href="https://steamcommunity.com/id/nut3la1/" target="_blank" rel="noopener noreferrer" 
+               class="rm-button w-full py-4 px-6 rounded-xl flex items-center justify-between group text-lg font-semibold tracking-wider">
+                <span class="flex items-center gap-3">
+                    <i class="fa-brands fa-steam text-2xl group-hover:text-black transition-colors"></i>
+                    Steam
+                </span>
+                <i class="fa-solid fa-chevron-right opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+            </a>
+
+            <!-- Company -->
+            <a href="https://tvoriste.eu/" target="_blank" rel="noopener noreferrer" 
+               class="rm-button w-full py-4 px-6 rounded-xl flex items-center justify-between group text-lg font-semibold tracking-wider">
+                <span class="flex items-center gap-3">
+                    <i class="fa-solid fa-briefcase text-2xl group-hover:text-black transition-colors"></i>
+                    Tvořiště.eu
+                </span>
+                <i class="fa-solid fa-chevron-right opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+            </a>
+
+        </div>
+
+        <!-- Footer / Social mini icons -->
+        <div class="mt-6 pt-6 border-t border-[#89d819]/30 w-full flex justify-center gap-6">
+            <button onclick="shareProfile()" class="text-[#89d819] hover:text-white transition-colors duration-300 hover:drop-shadow-[0_0_8px_#89d819]" title="Share via link">
+                <i class="fa-solid fa-share-nodes text-xl"></i>
+            </button>
+            <a href="https://github.com/Skeetek" target="_blank" class="text-[#89d819] hover:text-white transition-colors duration-300 hover:drop-shadow-[0_0_8px_#89d819]" title="GitHub">
+                <i class="fa-brands fa-github text-xl"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Helper Script for Native Sharing or Clipboard Copying -->
+    <script>
+        function shareProfile() {
+            const url = window.location.href;
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Skeetek | Links',
+                    url: url
+                }).catch(console.error);
+            } else {
+                // Fallback to clipboard copy
+                const textArea = document.createElement("textarea");
+                textArea.value = url;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    
+                    // Simple inline toast notification without using alert()
+                    showToast("Link copied to clipboard!");
+                } catch (err) {
+                    console.error('Failed to copy', err);
+                }
+                document.body.removeChild(textArea);
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.textContent = message;
+            toast.className = 'fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-[#89d819] text-black px-6 py-3 rounded-full font-bold shadow-[0_0_15px_#89d819] z-50 transition-opacity duration-500 font-["Orbitron"]';
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => document.body.removeChild(toast), 500);
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
