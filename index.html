@@ -131,6 +131,49 @@
         .music-btn:hover {
             transform: scale(1.05);
         }
+
+        /* Custom Volume Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: var(--portal-green);
+            cursor: pointer;
+            margin-top: -6px;
+            box-shadow: 0 0 8px var(--portal-green);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: rgba(137, 216, 25, 0.3);
+            border-radius: 2px;
+        }
+        input[type=range]:focus {
+            outline: none;
+        }
+        input[type=range]::-moz-range-thumb {
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: var(--portal-green);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 8px var(--portal-green);
+        }
+        input[type=range]::-moz-range-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: rgba(137, 216, 25, 0.3);
+            border-radius: 2px;
+        }
     </style>
 </head>
 <body class="antialiased flex items-center justify-center p-4 sm:p-8">
@@ -217,11 +260,21 @@
                 <i class="fa-solid fa-chevron-right opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
             </a>
             
-            <!-- Music Toggle Button -->
-            <button id="musicToggleBtn" onclick="toggleMusic()" class="rm-button music-btn mt-2 w-full py-3 px-6 rounded-xl flex items-center justify-center gap-3 text-md font-semibold tracking-wider text-gray-300">
-                <i id="musicIcon" class="fa-solid fa-play"></i>
-                <span id="musicText">Play Theme</span>
-            </button>
+            <!-- Music Controls Container -->
+            <div class="w-full flex flex-col gap-4 mt-2 bg-black/40 p-4 rounded-2xl border border-[#89d819]/30 shadow-inner">
+                <!-- Music Toggle Button -->
+                <button id="musicToggleBtn" onclick="toggleMusic()" class="rm-button music-btn w-full py-3 px-6 rounded-xl flex items-center justify-center gap-3 text-md font-semibold tracking-wider text-gray-300">
+                    <i id="musicIcon" class="fa-solid fa-play"></i>
+                    <span id="musicText">Play Theme</span>
+                </button>
+
+                <!-- Volume Slider -->
+                <div class="flex items-center gap-3 px-2 w-full">
+                    <i class="fa-solid fa-volume-low text-gray-400 text-sm"></i>
+                    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
+                    <i class="fa-solid fa-volume-high text-[#89d819] text-sm drop-shadow-[0_0_5px_rgba(137,216,25,0.8)]"></i>
+                </div>
+            </div>
 
         </div>
 
@@ -242,6 +295,7 @@
         const bgMusic = document.getElementById('bgMusic');
         const musicIcon = document.getElementById('musicIcon');
         const musicText = document.getElementById('musicText');
+        const volumeSlider = document.getElementById('volumeSlider');
         let isPlaying = false;
         let isSongSelected = false;
 
@@ -260,7 +314,7 @@
                 isSongSelected = true;
             }
             
-            bgMusic.volume = 0.5;
+            bgMusic.volume = volumeSlider.value;
             
             // Browsers typically block autoplay without user interaction.
             // We catch the promise rejection so it doesn't throw an ugly error in the console.
@@ -281,6 +335,11 @@
             }
         });
 
+        // Handle Volume Slider Changes
+        volumeSlider.addEventListener('input', (e) => {
+            bgMusic.volume = e.target.value;
+        });
+
         function toggleMusic() {
             // Failsafe: if the song wasn't selected on load for some reason
             if (!isSongSelected) {
@@ -297,7 +356,7 @@
                 musicText.innerText = "Play Theme";
                 isPlaying = false;
             } else {
-                bgMusic.volume = 0.5; // Set a reasonable default volume
+                bgMusic.volume = volumeSlider.value; // Sync with slider before playing
                 bgMusic.play().catch(error => {
                     console.error("Audio playback failed:", error);
                     showToast("Browser prevented audio playback.");
