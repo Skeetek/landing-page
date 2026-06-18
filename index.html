@@ -5,32 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skeetek | Links</title>
     
-    <!-- Browser Tab Icon (Favicon) to fix the red console error -->
     <link rel="icon" type="image/jpeg" href="365238.jpg">
     
-    <!-- Social Media Embed / Discord Preview Tags -->
     <meta property="og:title" content="Skeetek | Links">
     <meta property="og:description" content="Wubba Lubba Dub Dub! Check out my links.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://skeetek.github.io/">
     
-    <!-- THIS IS THE IMAGE THAT SHOWS IN DISCORD -->
-    <!-- You must use the full "https://..." link for the image to work in Discord -->
     <meta property="og:image" content="https://skeetek.github.io/365238.jpg">
     
-    <!-- Extra tags for Twitter / X -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Skeetek | Links">
     <meta name="twitter:description" content="Wubba Lubba Dub Dub! Check out my links.">
     <meta name="twitter:image" content="https://skeetek.github.io/365238.jpg">
     
-    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Load Google Fonts: Orbitron for that Sci-Fi feel -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
     
-    <!-- Load FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -41,7 +33,6 @@
 
         body {
             font-family: 'Orbitron', sans-serif;
-            /* Fallback background if video fails */
             background: radial-gradient(circle at center, #1b0a2b 0%, #05020a 100%);
             color: white;
             margin: 0;
@@ -49,7 +40,6 @@
             min-height: 100vh;
         }
 
-        /* Video Background Styling */
         .video-bg {
             position: fixed;
             top: 0;
@@ -58,17 +48,15 @@
             height: 100vh;
             object-fit: cover;
             z-index: -2;
-            opacity: 0.85; /* Slightly dim it so the neon box stands out */
+            opacity: 0.85;
         }
 
-        /* Portal Glow Animation for Profile Picture */
         @keyframes pulse-glow {
             0% { box-shadow: 0 0 10px var(--portal-green), inset 0 0 10px var(--portal-green); }
             50% { box-shadow: 0 0 30px var(--portal-green), inset 0 0 20px var(--portal-green); }
             100% { box-shadow: 0 0 10px var(--portal-green), inset 0 0 10px var(--portal-green); }
         }
 
-        /* Added spinning animation for the static portal JPG */
         @keyframes spin-portal {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
@@ -82,7 +70,6 @@
             animation: pulse-glow 2s infinite ease-in-out;
         }
 
-        /* Glitch effect on hover for the name */
         .glitch-hover:hover {
             animation: glitch 0.3s linear infinite;
             color: #fff;
@@ -98,7 +85,6 @@
             100% { transform: translate(0) }
         }
 
-        /* Custom Button Styling */
         .rm-button {
             background: rgba(0, 0, 0, 0.6);
             border: 1px solid var(--portal-green);
@@ -130,7 +116,6 @@
             font-weight: 800;
         }
 
-        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -142,7 +127,6 @@
             border-radius: 4px;
         }
         
-        /* Specific Music Button adjustments */
         .music-btn {
             border-style: dashed;
             cursor: pointer;
@@ -151,7 +135,6 @@
             transform: scale(1.05);
         }
 
-        /* Custom Volume Slider Styling */
         input[type=range] {
             -webkit-appearance: none;
             width: 100%;
@@ -197,36 +180,27 @@
 </head>
 <body class="antialiased flex items-center justify-center p-4 sm:p-8">
 
-    <!-- Audio Element (hidden) - Source is injected via JavaScript -->
     <audio id="bgMusic" loop></audio>
 
-    <!-- Looping Video Background -->
     <video autoplay loop muted playsinline class="video-bg">
         <source src="1675813688-1675813688-2023-rick-and-morty-live-wallpaper.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
-    <!-- Dark overlay to ensure text is readable against the background -->
     <div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[-1]"></div>
 
-    <!-- Main Container -->
     <div class="w-full max-w-md w-full bg-black/60 border-2 border-[#89d819] rounded-3xl p-8 shadow-[0_0_30px_rgba(137,216,25,0.4)] flex flex-col items-center gap-6 backdrop-blur-md relative overflow-hidden">
-        
-        <!-- Decorative subtle elements -->
+
         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#89d819] to-transparent opacity-70"></div>
         
-        <!-- Profile Picture Container -->
         <div class="relative w-40 h-40 flex items-center justify-center mt-4">
-            <!-- Spinning Portal Background (Transparent PNG) -->
             <img src="portal-transparent_1.png" alt="Portal" class="absolute w-80 h-80 max-w-none z-[-1] opacity-90 animate-spin-slow" style="pointer-events: none;">
-            
-            <!-- Actual Profile Picture layered on top -->
+        
             <div class="relative w-32 h-32 rounded-full portal-border p-1 bg-black overflow-hidden z-10">
                 <img src="365238.jpg" alt="Skeetek" class="w-full h-full object-cover rounded-full shadow-inner" onerror="this.src='https://placehold.co/200x200/1b4504/89d819?text=Rick'">
             </div>
         </div>
 
-        <!-- Name and Tagline -->
         <div class="text-center w-full">
             <h1 class="text-3xl sm:text-4xl font-bold tracking-widest text-[#89d819] drop-shadow-[0_0_8px_rgba(137,216,25,0.8)] glitch-hover cursor-default transition-all duration-300">
                 Skeetek
@@ -236,10 +210,8 @@
             </p>
         </div>
 
-        <!-- Links Section -->
         <div class="w-full flex flex-col gap-4 mt-2">
             
-            <!-- Instagram -->
             <a href="https://www.instagram.com/easy.fragz/" target="_blank" rel="noopener noreferrer" 
                class="rm-button w-full py-4 px-6 rounded-xl flex items-center justify-between group text-lg font-semibold tracking-wider">
                 <span class="flex items-center gap-3">
@@ -249,7 +221,6 @@
                 <i class="fa-solid fa-chevron-right opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
             </a>
 
-            <!-- GitHub -->
             <a href="https://github.com/Skeetek" target="_blank" rel="noopener noreferrer" 
                class="rm-button w-full py-4 px-6 rounded-xl flex items-center justify-between group text-lg font-semibold tracking-wider">
                 <span class="flex items-center gap-3">
@@ -259,7 +230,6 @@
                 <i class="fa-solid fa-chevron-right opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
             </a>
 
-            <!-- Steam -->
             <a href="https://steamcommunity.com/id/nut3la1/" target="_blank" rel="noopener noreferrer" 
                class="rm-button w-full py-4 px-6 rounded-xl flex items-center justify-between group text-lg font-semibold tracking-wider">
                 <span class="flex items-center gap-3">
@@ -269,7 +239,6 @@
                 <i class="fa-solid fa-chevron-right opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
             </a>
 
-            <!-- Company -->
             <a href="https://tvoriste.eu/" target="_blank" rel="noopener noreferrer" 
                class="rm-button w-full py-4 px-6 rounded-xl flex items-center justify-between group text-lg font-semibold tracking-wider">
                 <span class="flex items-center gap-3">
@@ -278,16 +247,13 @@
                 </span>
                 <i class="fa-solid fa-chevron-right opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
             </a>
-            
-            <!-- Music Controls Container -->
+        
             <div class="w-full flex flex-col gap-4 mt-2 bg-black/40 p-4 rounded-2xl border border-[#89d819]/30 shadow-inner">
-                <!-- Music Toggle Button -->
                 <button id="musicToggleBtn" onclick="toggleMusic()" class="rm-button music-btn w-full py-3 px-6 rounded-xl flex items-center justify-center gap-3 text-md font-semibold tracking-wider text-gray-300">
                     <i id="musicIcon" class="fa-solid fa-play"></i>
                     <span id="musicText">Play Theme</span>
                 </button>
 
-                <!-- Volume Slider -->
                 <div class="flex items-center gap-3 px-2 w-full">
                     <i class="fa-solid fa-volume-low text-gray-400 text-sm"></i>
                     <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
@@ -297,7 +263,6 @@
 
         </div>
 
-        <!-- Footer / Social mini icons -->
         <div class="mt-6 pt-6 border-t border-[#89d819]/30 w-full flex justify-center gap-6">
             <button onclick="shareProfile()" class="text-[#89d819] hover:text-white transition-colors duration-300 hover:drop-shadow-[0_0_8px_#89d819]" title="Share via link">
                 <i class="fa-solid fa-share-nodes text-xl"></i>
@@ -308,9 +273,7 @@
         </div>
     </div>
 
-    <!-- Helper Scripts -->
     <script>
-        // Music Toggle Logic
         const bgMusic = document.getElementById('bgMusic');
         const musicIcon = document.getElementById('musicIcon');
         const musicText = document.getElementById('musicText');
@@ -318,14 +281,12 @@
         let isPlaying = false;
         let isSongSelected = false;
 
-        // Array of your exact filenames
         const playlist = [
             "Rick and Morty Official Soundtrack  Don't Look Back (Diane's Version) - Ryan Elder & Kotomi.mp3",
             "Rick and Morty Official Soundtrack  For Ages - WaxWane & Ryan Elder  Rick and Morty.mp3",
             "Rick and Morty Official Soundtrack  Dimensional Infrastructure - Ryan Elder  Rick and Morty.mp3"
         ];
 
-        // Attempt to autoplay when the page loads
         window.addEventListener('DOMContentLoaded', () => {
             if (!isSongSelected) {
                 const randomSong = playlist[Math.floor(Math.random() * playlist.length)];
@@ -334,33 +295,26 @@
             }
             
             bgMusic.volume = volumeSlider.value;
-            
-            // Browsers typically block autoplay without user interaction.
-            // We catch the promise rejection so it doesn't throw an ugly error in the console.
+
             const playPromise = bgMusic.play();
             
             if (playPromise !== undefined) {
                 playPromise.then(() => {
-                    // Autoplay worked!
                     musicIcon.classList.remove('fa-play');
                     musicIcon.classList.add('fa-pause');
                     musicText.innerText = "Pause Theme";
                     isPlaying = true;
                 }).catch(error => {
-                    // Autoplay was blocked by the browser. 
-                    // This is normal. The user will just have to click the button.
                     console.log("Autoplay blocked by browser policy. User must interact first.");
                 });
             }
         });
 
-        // Handle Volume Slider Changes
         volumeSlider.addEventListener('input', (e) => {
             bgMusic.volume = e.target.value;
         });
 
         function toggleMusic() {
-            // Failsafe: if the song wasn't selected on load for some reason
             if (!isSongSelected) {
                 const randomSong = playlist[Math.floor(Math.random() * playlist.length)];
                 bgMusic.src = randomSong;
@@ -375,7 +329,7 @@
                 musicText.innerText = "Play Theme";
                 isPlaying = false;
             } else {
-                bgMusic.volume = volumeSlider.value; // Sync with slider before playing
+                bgMusic.volume = volumeSlider.value;
                 bgMusic.play().catch(error => {
                     console.error("Audio playback failed:", error);
                     showToast("Browser prevented audio playback.");
@@ -386,8 +340,7 @@
                 isPlaying = true;
             }
         }
-        
-        // Share / Copy Logic
+
         function shareProfile() {
             const url = window.location.href;
             if (navigator.share) {
@@ -411,7 +364,6 @@
             }
         }
 
-        // Custom Toast Notification
         function showToast(message) {
             const toast = document.createElement('div');
             toast.textContent = message;
